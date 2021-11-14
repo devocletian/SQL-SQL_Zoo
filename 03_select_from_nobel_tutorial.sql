@@ -51,3 +51,27 @@ AND p.yr NOT IN
   FROM nobel c
   WHERE c.subject = 'Chemistry'
 )
+
+
+-- 9. Show the year, subject, and name of winners for 1980 excluding Chemistry and Medicine
+
+SELECT yr, subject, winner
+FROM nobel
+where subject NOT in ('Chemistry', 'Medicine')
+AND yr = 1980
+
+-- 10. Show year, subject, and name of people who won a 'Medicine' prize in an early year 
+-- (before 1910, not including 1910) together with winners of a 'Literature' 
+-- prize in a later year (after 2004, including 2004)
+
+SELECT l.yr, l.subject, l.winner
+from nobel l
+where l.subject = 'Literature'
+and l.yr >= 2004
+UNION
+SELECT m.yr, m.subject, m.winner
+from nobel m
+where m.subject = 'Medicine'
+and m.yr < 1910
+
+
